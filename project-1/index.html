@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="author" content="Gabriel Drozdov">
+	<meta name="description" content="Syllabus for RISD’s Fall 2022 Web Programming Workshop">
+	<title>PROJECT 1</title>
+	<link rel="stylesheet" href="style.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+
+<body>
+
+	<main>
+		<div class="content">
+			<div class="txt-parent">
+				<p>01<br>Get out of bed</p>
+			</div>
+			<div class="img-parent">
+				<img src="assets/01.jpg" class="img-child" data-inviewport="img-in1">
+			</div>
+			<div class="txt-parent">
+				<p>02<br>Go to the kitchen</p>
+			</div>
+			<div class="img-parent">
+				<img src="assets/02.jpg" class="img-child" data-inviewport="img-in2">
+			</div>
+			<div class="txt-parent">
+				<p>03<br>Take the English muffins out of the fridge</p>
+			</div>
+			<div class="img-parent">
+				<img src="assets/03.jpg" class="img-child" data-inviewport="img-in1">
+			</div>
+			<div class="txt-parent">
+				<p>04<br>Take the sliced cheese out of the fridge</p>
+			</div>
+			<div class="img-parent">
+				<img src="assets/04.jpg" class="img-child" data-inviewport="img-in2">
+			</div>
+			<div class="txt-parent">
+				<p>05<br>Take the eggs out of the fridge</p>
+			</div>
+			<div class="img-parent">
+				<img src="assets/05.jpg" class="img-child" data-inviewport="img-in1">
+			</div>
+			<div class="txt-parent">
+				<p>06<br>Take the butter out of the fridge</p>
+			</div>
+			<div class="img-parent">
+				<img src="assets/06.jpg" class="img-child" data-inviewport="img-in2">
+			</div>
+			<div class="txt-parent">
+				<p>07<br>Take the jam out of the fridge</p>
+			</div>
+			<div class="img-parent">
+				<img src="assets/07.jpg" class="img-child" data-inviewport="img-in1">
+			</div>
+			<div class="txt-parent">
+				<p>08<br>Slice an English muffin in half</p>
+			</div>
+			<div class="img-parent">
+				<img src="assets/08.jpg" class="img-child" data-inviewport="img-in2">
+			</div>
+			<div class="txt-parent">
+				<p>09<br>Toast the English muffin halves</p>
+			</div>
+			<div class="img-parent">
+				<img src="assets/09.jpg" class="img-child" data-inviewport="img-in1">
+			</div>
+			<div class="txt-parent">
+				<p>10<br>Take a nonstick frying pan out of the cabinet</p>
+			</div>
+			<div class="img-parent">
+				<img src="assets/10.jpg" class="img-child" data-inviewport="img-in2">
+			</div>
+			<div class="txt-parent">
+				<p>11<br>Heat the pan on medium heat on the stove</p>
+			</div>
+			<div class="img-parent">
+				<img src="assets/11.jpg" class="img-child" data-inviewport="img-in1">
+			</div>
+			<div class="txt-parent">
+				<p>12<br>Place a gob of butter in the pan</p>
+			</div>
+			<div class="img-parent">
+				<img src="assets/12.jpg" class="img-child" data-inviewport="img-in2">
+			</div>
+			<div class="txt-parent">
+				<p>13<br>Once the butter melts and sizzles, crack two eggs into the pan</p>
+			</div>
+			<div class="img-parent">
+				<img src="assets/13.jpg" class="img-child" data-inviewport="img-in1">
+			</div>
+			<div class="txt-parent">
+				<p>14<br>Take the English muffins out of the toaster</p>
+			</div>
+			<div class="img-parent">
+				<img src="assets/14.jpg" class="img-child" data-inviewport="img-in2">
+			</div>
+			<div class="txt-parent">
+				<p>15<br>Spread the jam on the English muffin halves</p>
+			</div>
+			<div class="img-parent">
+				<img src="assets/15.jpg" class="img-child" data-inviewport="img-in1">
+			</div>
+			<div class="txt-parent">
+				<p>16<br>Flip the eggs without popping the yolks</p>
+			</div>
+			<div class="img-parent">
+				<img src="assets/16.jpg" class="img-child" data-inviewport="img-in2">
+			</div>
+			<div class="txt-parent">
+				<p>17<br>Rip a cheese slice in quarters</p>
+			</div>
+			<div class="img-parent">
+				<img src="assets/17.jpg" class="img-child" data-inviewport="img-in1">
+			</div>
+			<div class="txt-parent">
+				<p>18<br>Put two cheese quarters on each half of the English muffin (do not close the halves)</p>
+			</div>
+			<div class="img-parent">
+				<img src="assets/18.jpg" class="img-child" data-inviewport="img-in2">
+			</div>
+			<div class="txt-parent">
+				<p>19<br>Put a fried egg on each English muffin half</p>
+			</div>
+			<div class="img-parent">
+				<img src="assets/19.jpg" class="img-child" data-inviewport="img-in1">
+			</div>
+			<div class="txt-parent">
+				<p>20<br>Consume using a fork and knife</p>
+			</div>
+			<div class="img-parent">
+				<img src="assets/20.jpg" class="img-child" data-inviewport="img-in2">
+			</div>
+		</div>
+	</main>
+
+<script>
+	const scrollContainer = document.querySelector("main");
+	scrollContainer.addEventListener("wheel", (evt) => {
+		evt.preventDefault();
+		scrollContainer.scrollLeft += evt.deltaY;
+	});
+
+	$(function() {
+		$(".img-parent").each(function(){
+			var a = Math.random() * 40 - 20;
+			$(this).css('transform', 'rotate(' + a + 'deg)');
+		});
+		$(".txt-parent").each(function(){
+			var b = Math.random() * 20 - 10;
+			$(this).css('transform', 'rotate(' + b + 'deg)');
+		});
+	});
+
+	const inViewport = (entries, observer) => {
+		entries.forEach(entry => {
+			entry.target.classList.toggle("is-inViewport", entry.isIntersecting);
+		});
+	};
+
+	const Obs = new IntersectionObserver(inViewport);
+	const obsOptions = {};
+
+	const ELs_inViewport = document.querySelectorAll('[data-inviewport]');
+	ELs_inViewport.forEach(EL => {
+		Obs.observe(EL, obsOptions);
+	});
+
+</script>
+
+</body>
+
+</html>

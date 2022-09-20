@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="author" content="Gabriel Drozdov">
+	<meta name="description" content="Syllabus for RISD’s Fall 2022 Web Programming Workshop">
+	<title>SOURCE | GABRIEL DROZDOV</title>
+	<link rel="stylesheet" href="style.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+
+<body>
+
+	<div class="grid">
+		<div><h1 class="element">SOURCE</h1></div>
+		<div><h1 class="element">SOURCE</h1></div>
+		<div><h1 class="element">SOURCE</h1></div>
+		<div><h1 class="element">SOURCE</h1></div>
+		<div><h1 class="element">SOURCE</h1></div>
+		<div><h1 class="element">SOURCE</h1></div>
+		<div><h1 class="element">SOURCE</h1></div>
+		<div><h1 class="element">SOURCE</h1></div>
+		<div><h1 class="element">SOURCE</h1></div>
+		<div><a href="project-1">PROJECT 1</a></div>
+		<div><a href="project-2">PROJECT 2</a></div>
+		<div><a href="project-2">PROJECT 3</a></div>
+	</div>
+
+	<script>
+		$(function() {
+			$(".element").each(function(){
+				var a = Math.random() * 100 - 20;
+				$(this).css('transform', 'rotate(' + a + 'deg)');
+			});
+		});
+	</script>
+
+</body>
+
+</html>

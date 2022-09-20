@@ -1,0 +1,70 @@
+@font-face {
+	font-family: 'Inconsolata';
+	src: url("inconsolata.ttf") format("TrueType");
+	font-weight: normal;
+	font-style: normal;
+	font-variation-settings: "wght" 400, "wdth" 100;
+}
+* {
+	box-sizing: border-box;
+}
+body {
+	background-color: black;
+	font-family: "Inconsolata", monospace;
+	margin: 0;
+}
+main {
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-start;
+	overflow-x: scroll;
+}
+.content {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	flex-direction: row;
+	text-align: center;
+	color: white;
+}
+.content div {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 50vw;
+	flex-shrink: 0;
+	height: 80%;
+}
+.content div p {
+	padding: 20px;
+}
+.content div img {
+	height: 80%;
+	border-radius: 20px;
+}
+
+
+[data-inviewport] { /* THIS DEMO ONLY */
+}
+
+/* inViewport */
+
+[data-inviewport="img-in1"] {
+	transition: transform 2s, filter 3s;
+	transform: scale(.7) rotate(-15deg);
+	filter: grayscale(100%) brightness(0) blur(20px);
+}
+[data-inviewport="img-in1"].is-inViewport {
+	transform: scale(1) rotate(5deg);
+	filter: grayscale(0%) brightness(1) blur(0px);
+}
+[data-inviewport="img-in2"] {
+	transition: transform 2s, filter 3s;
+	transform: scale(.7) rotate(15deg);
+	filter: grayscale(100%) brightness(0)  blur(20px);
+}
+[data-inviewport="img-in2"].is-inViewport {
+	transform: scale(1) rotate(-5deg);
+	filter: grayscale(0%) brightness(1) blur(0px);
+}
