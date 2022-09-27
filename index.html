@@ -30,12 +30,14 @@
 	</div>
 
 	<script>
-		$(function() {
+		function twisty() {
 			$(".element").each(function(){
-				var a = Math.random() * 100 - 20;
-				$(this).css('transform', 'rotate(' + a + 'deg)');
+				var a = Math.random() * 1000 - 500;
+				var b = Math.random() * 10 - .5;
+				$(this).css('transform', 'rotate('+ a + 'deg) scale('+b+')');
 			});
-		});
+		};
+		var t = setInterval(twisty,1000);
 	</script>
 
 </body>

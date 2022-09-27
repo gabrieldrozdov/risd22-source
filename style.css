@@ -1,9 +1,13 @@
 * {
-	font-size: 12px;
+	font-size: 50px;
+	transition: 1s;
 }
 body {
 	margin: 0;
 	padding: 20px;
+}
+.element {
+	pointer-events: none;
 }
 .grid {
 	display: grid;
