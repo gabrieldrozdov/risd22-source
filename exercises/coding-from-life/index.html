@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>First Last, Still Life</title>
+  <link rel="stylesheet" href="reset.css">
+  <link rel="stylesheet" href="main.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+  <div class="smiley">
+    <div class="eyes-container">
+      <div class="eye1 blink" style="grid-area:eye1"></div>
+      <div class="eye2 blink" style="grid-area:eye2"></div>
+    </div>
+    <div class="mouth-container">
+      <div class="mouth"></div>
+    </div>
+  </div>
+  <script>
+    function haha() {
+      var a = Math.random() * 100;
+      var b = 100 - a;
+      $(".eyes-container").each(function(){
+        console.log(a);
+        $(this).css('height', a+'vh');
+      });
+      $(".mouth-container").each(function(){
+        console.log(b);
+        $(this).css('height', b+'vh');
+      });
+    };
+    var t = setInterval(haha,1000);
+  </script>
+</body>
+</html>

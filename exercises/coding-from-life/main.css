@@ -1,0 +1,56 @@
+* {
+	transition: 1s;
+}
+@keyframes smiley{
+	from {
+
+	}
+	to {
+		
+	}
+}
+.smiley {
+	background-color:yellow;
+	width:100vw;
+	height:100vh;
+	border-radius:100%;
+	position: relative;
+}
+.eyes-container {
+	width: 100vw;
+	height: 50vh;
+	display: flex;
+	align-items: stretch;
+	justify-content: space-around;
+}
+.mouth-container {
+	width: 100vw;
+	height: 50vh;
+	display: flex;
+	justify-content: center;
+}
+.eye1 {
+	margin-left: 20vw;
+}
+.eye2 {
+	margin-right: 20vw;
+}
+.blink {
+	background-color:black;
+	border-radius:100%;
+	width: 10vw;
+}
+.blink:hover {
+	transform: scaleY(0);
+}
+.mouth {
+    border-bottom-left-radius: 100%;
+    border-bottom-right-radius: 100%;
+    border: 5vw solid black;
+    height: 100%;
+    width: 50%;
+    border-top: 0;
+}
+.mouth:hover {
+	transform: rotateX(180deg);
+}
