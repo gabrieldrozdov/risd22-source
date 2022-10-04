@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="author" content="Gabriel Drozdov">
+	<title>PROJECT 1 (v2)</title>
+	<link rel="stylesheet" href="style.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+
+<body>
+	<main class="content">
+		<div class="polaroids">
+			<img id="img1" class="polaroid" src="../assets/01.jpg">
+			<img id="img2" class="polaroid" src="../assets/02.jpg">
+			<img id="img3" class="polaroid" src="../assets/03.jpg">
+			<img id="img4" class="polaroid" src="../assets/04.jpg">
+			<img id="img5" class="polaroid" src="../assets/05.jpg">
+			<img id="img6" class="polaroid" src="../assets/06.jpg">
+			<img id="img7" class="polaroid" src="../assets/07.jpg">
+			<img id="img8" class="polaroid" src="../assets/08.jpg">
+			<img id="img9" class="polaroid" src="../assets/09.jpg">
+			<img id="img10" class="polaroid" src="../assets/10.jpg">
+			<img id="img11" class="polaroid" src="../assets/11.jpg">
+			<img id="img12" class="polaroid" src="../assets/12.jpg">
+			<img id="img13" class="polaroid" src="../assets/13.jpg">
+			<img id="img14" class="polaroid" src="../assets/14.jpg">
+			<img id="img15" class="polaroid" src="../assets/15.jpg">
+			<img id="img16" class="polaroid" src="../assets/16.jpg">
+			<img id="img17" class="polaroid" src="../assets/17.jpg">
+			<img id="img18" class="polaroid" src="../assets/18.jpg">
+			<img id="img19" class="polaroid" src="../assets/19.jpg">
+			<img id="img20" class="polaroid" src="../assets/20.jpg">
+		</div>
+
+		<div class="tasks">
+			<p id="1" class="btn show featured">01<br>Get out of bed</p>
+			<p id="2" class="btn">02<br>Go to the kitchen</p>
+			<p id="3" class="btn">03<br>Take the English muffins out of the fridge</p>
+			<p id="4" class="btn">04<br>Take the sliced cheese out of the fridge</p>
+			<p id="5" class="btn">05<br>Take the eggs out of the fridge</p>
+			<p id="6" class="btn">06<br>Take the butter out of the fridge</p>
+			<p id="7" class="btn">07<br>Take the jam out of the fridge</p>
+			<p id="8" class="btn">08<br>Slice an English muffin in half</p>
+			<p id="9" class="btn">09<br>Toast the English muffin halves</p>
+			<p id="10" class="btn">10<br>Take a nonstick frying pan out of the cabinet</p>
+			<p id="11" class="btn">11<br>Heat the pan on medium heat on the stove</p>
+			<p id="12" class="btn">12<br>Place a gob of butter in the pan</p>
+			<p id="13" class="btn">13<br>Once the butter melts and sizzles, crack two eggs into the pan</p>
+			<p id="14" class="btn">14<br>Take the English muffins out of the toaster</p>
+			<p id="15" class="btn">15<br>Spread the jam on the English muffin halves</p>
+			<p id="16" class="btn">16<br>Flip the eggs without popping the yolks</p>
+			<p id="17" class="btn">17<br>Rip a cheese slice in quarters</p>
+			<p id="18" class="btn">18<br>Put two cheese quarters on each half of the English muffin (do not close the halves)</p>
+			<p id="19" class="btn">19<br>Put a fried egg on each English muffin half</p>
+			<p id="20" class="btn">20<br>Consume using a fork and knife</p>
+		</div>
+	</main>
+
+	<script>
+		$(document).ready(function(){
+			$(".btn").click(function(){
+				var task = parseInt($(this).attr("id"));
+				var next = task+1;
+				$("#"+next).addClass("show");
+				$("#"+next).addClass("featured");
+				$("#"+task).removeClass("featured");
+				$("#img"+next).addClass("polaroid-show");
+				$("#img"+next).addClass("polaroid-featured");
+				$("#img"+task).removeClass("polaroid-featured");
+				for (let i = next+1; i<=20; i++) {
+					$("#"+i).removeClass("featured");
+					$("#"+i).removeClass("show");
+					$("#img"+i).removeClass("polaroid-featured");
+					$("#img"+i).removeClass("polaroid-show");
+				}
+			});
+		});
+
+		const fonts = ["Verdana", "Times New Roman", "Arial", "Courier New", "Comic Sans", "Arial Narrow", "Arial Black", "Trebuchet MS", "Papyrus", "Georgia"]
+		$(function() {
+			$(".btn").each(function(){
+				var ypad = Math.random() * 100+20;
+				$(this).css('padding', ypad+"px "+"5px");
+				var font = parseInt(Math.random() * 10);
+				$(this).css('font-family', fonts[font]);
+			});
+			$(".polaroid").each(function(){
+				var width = Math.random() * 5+5;
+				$(this).css('max-width', width+"vw");
+			});
+		});
+	</script>
+</body>
+</html>

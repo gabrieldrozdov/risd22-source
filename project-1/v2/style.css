@@ -1,0 +1,74 @@
+* {
+	box-sizing: border-box;
+}
+body {
+	background-color: black;
+	font-family: serif;
+	margin: 0;
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+}
+.polaroids {
+	display: flex;
+	position: absolute;
+	flex-wrap: wrap;
+	flex-direction: column-reverse;
+	height: 100vh;
+	justify-content: flex-end;
+}
+.polaroid {
+	max-width: 30vw;
+	flex-basis: 1;
+	transition: .5s;
+	filter: brightness(.25) sepia(1);
+	transform: translateY(-100%);
+	position: absolute;
+	opacity: 0;
+	box-shadow: 0 10px 100px black;
+	width: 100%;
+}
+.polaroid-show {
+	position: static;
+	transform: translateY(0);
+	opacity: 1;
+}
+.polaroid-featured {
+	filter: brightness(1) sepia(0);
+	max-width: 30vmax !important;
+}
+.tasks {
+	display: flex;
+	align-items: flex-end;
+	justify-content: flex-end;
+	height: 100vh;
+	text-align: center;
+	color: white;
+	gap: 0;
+}
+.btn {
+	border: 5px double white;
+	margin: 0;
+	flex-basis: 0;
+	cursor: pointer;
+	transition: .5s;
+	position: absolute;
+	opacity: 0;
+	transform: translateY(100%);
+}
+.btn:hover {
+	font-size: 3em;
+	border: 15px double white;
+}
+.show {
+	position: static;
+	opacity: 1;
+	transform: translateY(0);
+}
+.featured {
+	background-color: white;
+	color: black;
+}
+.featured:hover {
+	border: 15px double black;
+}
