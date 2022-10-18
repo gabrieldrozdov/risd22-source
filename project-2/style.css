@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,500;1,300;1,500&family=IBM+Plex+Serif:ital,wght@0,200;0,400;1,200;1,400&display=swap');
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+body {
+	font-family: "IBM Plex Sans", sans-serif;
+	font-weight: lighter;
+}
+h1,h2,h3,h4,h5,h6 {
+	font-family: "IBM Plex Serif", serif;
+}
+.container {
+	background-color: #fafafa;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	width: 100vw;
+}
+.phone {
+	border-radius: 50px;
+	width: 360px;
+	height: 660px;
+	background-color: white;
+	box-shadow: 0 5px 20px rgba(0,0,0,.4);
+	padding: 20px;
+	overflow-y: scroll;
+	transition: .4s;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+	position: relative;
+	overflow: hidden;
+}
+.phone:hover {
+	box-shadow: 0 10px 40px rgba(0,0,0,.2);
+	transform: scale(1.05);
+}
+.phone::-webkit-scrollbar {
+	display: none;
+}
+.article {
+	transition: .2s;
+}
+@keyframes flash {
+	0% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0;
+	}
+}
+.article h1 {
+	font-family: "IBM Plex Sans";
+	margin-bottom: 20px;
+	font-size: 14px;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	text-align: center;
+	animation: 1s flash infinite step-end;
+	color: red;
+	font-weight: bold;
+	line-height: 1em;
+}
+.article h2 {
+	font-size: 30px;
+	line-height: 1.2em;
+	margin-bottom: 10px;
+	transition: .2s;
+}
+.article h3 {
+	font-size: 18px;
+	line-height: 1.2em;
+	margin-bottom: 20px;
+	transition: .2s;
+}
+.article figure {
+	margin-bottom: 20px;
+}
+.article img {
+	margin: 0 -20px;
+	width: calc(100% + 40px);
+}
+.article figcaption {
+	font-size: 8px;
+	color: rgba(0,0,0,.6);
+}
+.article p {
+	font-size: 14px;
+	line-height: 1.2em;
+	margin-bottom: 10px;	
+	font-weight: 300;
+	color: rgba(0,0,0,.8);
+}
+.phone:hover .article {
+	filter: blur(5px);
+}
+.blocker {
+	position: absolute;
+	bottom: 0;
+	background-color: black;
+	color: white;
+	text-align: center;
+	margin: 0 -20px;
+	padding: 20px;
+	width: 100%;
+	transition: .2s;
+	transform: translateY(100%);
+}
+.blocker button {
+	color: black;
+	border-radius: 5px;
+	background-color: white;
+	padding: 5px 15px;
+	margin-top: 10px;
+	line-height: 1em;
+	border: 2px solid white;
+	font-family: "IBM Plex Sans";
+	cursor: pointer;
+	transition: .2s;
+}
+.blocker button:hover {
+	color: white;
+	background-color: black;
+}
+.blocker button:active {
+	opacity: .5;
+}
+.phone:hover .blocker {
+	transform: translateY(0%);
+}
