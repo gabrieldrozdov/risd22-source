@@ -1,41 +1,58 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="author" content="Gabriel Drozdov">
-	<title>SOURCE | GABRIEL DROZDOV</title>
-	<link rel="stylesheet" href="style.css">
+	<meta charset="utf-8" />
+	<link rel="icon" href="https://glitch.com/favicon.ico" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<title>{{seo.title}}</title>
+
+	<!-- Meta tags for SEO and social sharing -->
+	<link rel="canonical" href="{{seo.url}}">
+	<meta name="description" content="{{seo.description}}">
+	<meta property="og:title" content="{{seo.title}}">
+	<meta property="og:type" content="article">
+	<meta property="og:url" content="{{seo.url}}">
+	<meta property="og:description" content="{{seo.description}}">
+	<meta property="og:image" content="{{seo.image}}">
+	<meta name="twitter:card" content="summary">
+
+	<!-- Import the webpage's stylesheet -->
+	<link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
-
+	<div class="intro">
+		<h1>
+			<span class="intro-line1">BREAKING NEWS</span>
+			<span class="intro-line2">{{topic}}</span>
+		</h1>
+	</div>
 	<div class="container">
 		<div class="phone">
 			<div class="article">
-				<h1>BREAKING NEWS</h1>
-				<h2><em>Abrupt Reversal of Tax-Cut Plan Deepens Crisis for Liz Truss</em></h2>
-				<h3>Jeremy Hunt, the new finance minister, dropped almost all of Ms. Truss’s planned cuts, a deeply humbling reversal for Ms. Truss.</h3>
+				<p class="article-breaking"><span>BREAKING NEWS</span></p>
+				<h2><em id="headline">{{response.[0]}}</em></h2>
+				<h3>{{response.[1]}}</h3>
 				<figure>
-					<img src="https://static01.nyt.com/images/2022/10/17/world/17russia-iran1/merlin_215023455_8b7260b3-805f-402a-a7bd-ea0556ce2f8e-threeByTwoMediumAt2X.jpg?format=pjpg&quality=75&auto=webp&disable=upscale">
-					<figcaption>Yasuyoshi Chiba/Agence France-Presse — Getty Images</figcaption>
+					<div class="fig">
+						<img src="https://source.unsplash.com/random/?{{topic}}">
+					</div>
+					<figcaption>Photos provided by <a href="https://unsplash.com/">Unsplash</a></figcaption>
 				</figure>
-				<p>LONDON — Under relentless pressure from financial markets, Britain’s new chancellor of the Exchequer, Jeremy Hunt, swept away the free-market economic agenda of Prime Minister Liz Truss on Monday, a humiliating repudiation that left her credibility in tatters and her political survival in doubt.</p>
-				<p>Mr. Hunt said he would reverse virtually all the government’s planned tax cuts, which were the centerpiece of Ms. Truss’s promise to reignite Britain’s economic growth, but which kicked off weeks of market turmoil because of fears that they would force the government into massive new borrowing.</p>
-				<p>The wholesale about-face produced a striking tableau in Parliament later in the day when Mr. Hunt rose to defend the revamped fiscal plan. As he fenced with critics, an expressionless Ms. Truss sat silently behind him on the frontbench, already appearing like a bystander in her own government.</p>
-				<p>While Mr. Hunt’s statement calmed the markets, it set off a tumultuous day in British politics. Lawmakers from the opposition Labour Party demanded that Ms. Truss resign, and several Conservative lawmakers rose to criticize the way the government had rolled out its ill-fated fiscal plan.</p>
+				<p>{{response.[2]}}</p>
+				<p>{{response.[3]}}</p>
+				<p>{{response.[4]}}</p>
 			</div>
 
 			<div class="blocker">
-				<h4>You can’t read this article!</h4>
-				<p>Try another article maybe?</p>
-				<button>Click here!</button>
+				<h4>You’re out of free articles!</h4>
+				<p>What else do you want to not know about?</p>
+				<form method="post">
+						<input id="response" name="response" for="response" required="required" type="text">
+						<button type="submit">Submit</button>
+				</form>
 			</div>
 		</div>
 	</div>
-
 </body>
-
 </html>
