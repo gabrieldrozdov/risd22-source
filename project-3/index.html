@@ -1,16 +1,259 @@
-<!DOCTYPE html>
 <html>
+	<head>
+		<style>
+			* {
+				box-sizing: border-box;
+				margin: 0;
+			}
+			#container {
+				width: calc(100vw - 20px);
+				height: calc(100vh - 20px);
+				border: 1px solid black;
+				overflow: hidden;
+				margin: 10px;
+				cursor: all-scroll;
+			}
+			#content {
+				width: 500vw;
+				height: 500vw;
+				transform: translateX(-200vw) translateY(-200vw);
+				transition: transform .1s;
+				transition-timing-function: linear;
+				display: grid;
+				grid-template-columns: repeat(10, 1fr);
+				grid-template-rows: repeat(10, 1fr);
+				grid-gap: 5vw;
+				padding: 5vw;
+			}
+			.background-gradient {
+				width: 100vw;
+				height: 100vh;
+				position: fixed;
+				top: 0;
+				z-index: -1;
+				transition: opacity .2s;
+				transition-timing-function: linear;
+			}
+			#background-n {
+				background: linear-gradient(0deg, rgba(255,255,255,0) 75%, lightgreen 100%);
+				opacity: 0;
+			}
+			#background-e {
+				background: linear-gradient(90deg, rgba(255,255,255,0) 75%, lightgreen 100%);
+				opacity: 0;
+			}
+			#background-s {
+				background: linear-gradient(180deg, rgba(255,255,255,0) 75%, lightgreen 100%);
+				opacity: 0;
+			}
+			#background-w {
+				background: linear-gradient(270deg, rgba(255,255,255,0) 75%, lightgreen 100%);
+				opacity: 0;
+			}
+			.link {
+				border: 1px solid black;
+				border-radius:100%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 3vw;
+				text-align: center;
+				padding: 2vw;
+				color: black;
+				text-decoration: none;
+				cursor: inherit;
+				transition: .2s;
+				/* overflow-wrap: anywhere; */
+			}
+			.link:hover {
+				background-color: black;
+				color: white;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="background-n" class="background-gradient"></div>
+		<div id="background-e" class="background-gradient"></div>
+		<div id="background-s" class="background-gradient"></div>
+		<div id="background-w" class="background-gradient"></div>
+		<div id="container" onmousemove="setTarget(event)">
+			<div id="content"></div>
+		</div>
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="author" content="Gabriel Drozdov">
-	<title>SOURCE | GABRIEL DROZDOV</title>
-</head>
+		<script>
+			let container = document.querySelector("#container");
+			let content = document.querySelector("#content");
+			let backgroundN = document.querySelector("#background-n");
+			let backgroundE = document.querySelector("#background-e");
+			let backgroundS = document.querySelector("#background-s");
+			let backgroundW = document.querySelector("#background-w");
+			
+			let w = window.innerWidth;
+			let h = window.innerHeight;
+			let mouseX = 0;
+			let mouseY = 0;
+			let percentX = 0.5;
+			let percentY = 0.5;
+			function setTarget(e) {
+				mouseX = e.clientX;
+				mouseY = e.clientY;
+				percentX = mouseX/w;
+				percentY = mouseY/h;
+			};
 
-<body>
+			let posX = 0.5;
+			let posY = 0.5;
+			let velX = 0;
+			let velY = 0;
+			let maxVel = .1;
+			let acc = 0.005;
+			let range = .2;
+			setInterval(function() {
+				// Detect direction
+				if (percentX > 1-range) {
+					velX += (percentX-(1-range))*acc;
+				} else if (percentX < 0+range) {
+					velX -= (range-percentX)*acc;
+				} else {
+					velX *= .5;
+				}
+				if (percentY > 1-range) {
+					velY += (percentY-(1-range))*acc;
+				} else if (percentY < 0+range) {
+					velY -= (range-percentY)*acc;
+				} else {
+					velY *= .5;
+				}
 
-</body>
+				// Display the correct cursor
+				if (percentX > 1-range && percentY < 0+range){
+					container.style.cursor = "ne-resize";
+					backgroundN.style.opacity = 5*(range-percentY);
+					backgroundE.style.opacity = 5*(percentX-1+range);
+					backgroundS.style.opacity = 0;
+					backgroundW.style.opacity = 0;
+				} else if (percentX > 1-range && percentY > 1-range){
+					container.style.cursor = "se-resize";
+					backgroundS.style.opacity = 5*(percentY-1+range);
+					backgroundE.style.opacity = 5*(percentX-1+range);
+					backgroundN.style.opacity = 0;
+					backgroundW.style.opacity = 0;
+				} else if (percentX < 0+range && percentY > 1-range){
+					container.style.cursor = "sw-resize";
+					backgroundS.style.opacity = 5*(percentY-1+range);
+					backgroundW.style.opacity = 5*(range-percentX);
+					backgroundE.style.opacity = 0;
+					backgroundN.style.opacity = 0;
+				} else if (percentX < 0+range&& percentY < 0+range){
+					container.style.cursor = "nw-resize";
+					backgroundN.style.opacity = 5*(range-percentY);
+					backgroundW.style.opacity = 5*(range-percentX);
+					backgroundE.style.opacity = 0;
+					backgroundS.style.opacity = 0;
+				} else if (percentY < 0+range) {
+					container.style.cursor = "n-resize";
+					backgroundN.style.opacity = 5*(range-percentY);
+					backgroundE.style.opacity = 0;
+					backgroundS.style.opacity = 0;
+					backgroundW.style.opacity = 0;
+				} else if (percentX > 1-range) {
+					container.style.cursor = "e-resize";
+					backgroundE.style.opacity = 5*(percentX-1+range);
+					backgroundN.style.opacity = 0;
+					backgroundS.style.opacity = 0;
+					backgroundW.style.opacity = 0;
+				} else if (percentY > 1-range) {
+					container.style.cursor = "s-resize";
+					backgroundS.style.opacity = 5*(percentY-1+range);
+					backgroundE.style.opacity = 0;
+					backgroundN.style.opacity = 0;
+					backgroundW.style.opacity = 0;
+				} else if (percentX < 0+range) {
+					container.style.cursor = "w-resize";
+					backgroundW.style.opacity = 5*(range-percentX);
+					backgroundE.style.opacity = 0;
+					backgroundS.style.opacity = 0;
+					backgroundN.style.opacity = 0;
+				} else {
+					container.style.cursor = "all-scroll";
+					backgroundN.style.opacity = 0;
+					backgroundE.style.opacity = 0;
+					backgroundS.style.opacity = 0;
+					backgroundW.style.opacity = 0;
+				}
 
+				// Max velocity
+				if (velX > maxVel) {
+					velX = maxVel;
+				} else if (velX < -maxVel) {
+					velX = -maxVel;
+				}
+				if (velY > maxVel) {
+					velY = maxVel;
+				} else if (velY < -maxVel) {
+					velY = -maxVel;
+				}
+
+				// Set position
+				posX += velX;
+				posY += velY;
+
+				// Boundaries
+				if (posX > 1) {
+					posX = 1;
+					velX = 0;
+					backgroundE.style.background = "linear-gradient(90deg, rgba(255,255,255,0) 75%, red 100%)";
+					backgroundE.style.opacity = 1;
+				} else if (posX < 0) {
+					posX = 0;
+					velX = 0;
+					backgroundW.style.background = "linear-gradient(270deg, rgba(255,255,255,0) 75%, red 100%)";
+					backgroundW.style.opacity = 1;
+				} else {
+					backgroundE.style.background = "linear-gradient(90deg, rgba(255,255,255,0) 75%, lightgreen 100%)";
+					backgroundW.style.background = "linear-gradient(270deg, rgba(255,255,255,0) 75%, lightgreen 100%)";
+				}
+				if (posY > 1) {
+					posY = 1;
+					velY = 0;
+					backgroundS.style.background = "linear-gradient(180deg, rgba(255,255,255,0) 75%, red 100%)";
+					backgroundS.style.opacity = 1;
+				} else if (posY < 0) {
+					posY = 0;
+					velY = 0;
+					backgroundN.style.background = "linear-gradient(0deg, rgba(255,255,255,0) 75%, red 100%)";
+					backgroundN.style.opacity = 1;
+				} else {
+					backgroundS.style.background = "linear-gradient(180deg, rgba(255,255,255,0) 75%, lightgreen 100%)";
+					backgroundN.style.background = "linear-gradient(0deg, rgba(255,255,255,0) 75%, lightgreen 100%)";
+				}
+
+				content.style.transform = "translateX("+(-400*posX)+"vw) translateY("+(-450*posY)+"vw)";
+			}, 50);
+
+
+			/* Build Wikipedia api URL and fetch, then build spaces */
+			let url = "https://en.wikipedia.org/w/api.php"; 
+			let params = {
+				action: "query",
+				format: "json",
+				list: "random",
+				rnnamespace: "0",
+				rnlimit: "100"
+			};
+			url = url + "?origin=*";
+
+			Object.keys(params).forEach(function(key){url += "&" + key + "=" + params[key];});
+			fetch(url)
+				.then(function(response){return response.json();})
+				.then(function(response) {
+					let randoms = response.query.random;
+					for (var r in randoms) {
+						content.innerHTML += 
+						"<a href='https://en.wikipedia.org/wiki/"+randoms[r].title+"' target='_blank' class='link'>"+randoms[r].title+"</a>";
+						}
+					})
+				.catch(function(error){console.log(error);});
+		</script>
+	</body>
 </html>
