@@ -16,21 +16,45 @@
 			will-change: "font-size";
 		}
 		.input-container {
-			width:100vw;
+			width: 100vw;
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
 			align-items: center;
 			margin-top: 10px;
+			z-index: 999;
 		}
 		input {
 			border-radius: 20px;
-			border:1px solid black;
+			border: 1px solid black;
 			height: 30px;
-			z-index: 999;
 			text-align: center;
 			width: 100%;
 			max-width: 300px;
+		}
+		.slider {
+			cursor: grab;
+		}
+		.slider:active {
+			cursor: grabbing;
+		}
+		.button {
+			width: 100%;
+			max-width: 300px;
+			height: 30px;
+			border-radius: 20px;
+			border: 1px solid black;
+			box-shadow: 0 1px 0 black;
+			transition: .2s;
+			background: #0274ff;
+			cursor: pointer;
+		}
+		.button:hover {
+			background: #1449f2;
+			box-shadow: 0 3px 0 black;
+		}
+		.button:active {
+			box-shadow: 0 0px 0 black;
 		}
 		#container {
 			width: 100vw;
@@ -40,6 +64,7 @@
 			display: flex;
 			align-items: center;
 			justify-content: center;
+			z-index: -1;
 		}
 		#container span {
 			transition: 1s;
@@ -52,6 +77,7 @@
 	<div class="input-container">
 		<input type="text" id="inputText" name="fname">
 		<input type="range" min="-100" max="100" value="0" class="slider" id="inputSlider">
+		<button class="button" onclick="swap()"></button>
 	</div>
 	<p id="container"></p>
 	<script>
@@ -85,9 +111,12 @@
 			for (i=0; i<content.length; i++) {
 				content[i].style.fontSize = parseInt(Math.random()*50) + "em";
 			}
+		}, 1000);
+
+		function swap() {
 			let fontPick = fontTypes[parseInt(Math.random()*5)];
 			container.style.fontFamily = fontPick;
-		}, 1000);
+		}
 	</script>
 </body>
 </html>
