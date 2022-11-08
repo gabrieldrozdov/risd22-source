@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Ambient 2</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			scroll-behavior: smooth;
+		}
+		#container {
+			display: flex;
+			width: 100vw;
+			overflow-x: hidden;
+			flex-direction: column;
+		}
+		p {
+			font-size: 10vw;
+		}
+	</style>
+</head>
+<body>
+	<div id="container"></div>
+	<script>
+		let container = document.querySelector("#container");
+		let url;
+
+		setInterval(function() {
+			let lat = (Math.random()*180-90).toFixed(1);
+			let lon = (Math.random()*180-90).toFixed(1);
+			url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&temperature_unit=fahrenheit`
+			fetch(url)
+			.then((response) => response.json())
+			.then((data) => {
+				console.log(data);
+				let i = "id"+Math.floor(Math.random()*10000);
+				container.innerHTML += `<p id='${i}'> latitude: ${lat}<br>longitude: ${lat}<br>temp: ${data.current_weather.temperature}°F</p>`;
+				let temp = document.querySelector("#"+i);
+				temp.scrollIntoView();
+				console.log(temp);
+			});
+		}, 1500);
+
+	</script>
+</body>
+</html>
