@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Ambient</title>
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+			box-sizing: border-box;
+			overflow: hidden;
+		}
+		#container {
+			width: 100vw;
+			height: 100vh;
+		}
+		#imgs {
+			width: 100%;
+			height: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		.img {
+			position: absolute;
+			width: 50vw;
+			cursor: pointer;
+			transition: transform .5s;
+		}
+		.img:hover {
+			filter: brightness(50%);
+		}
+	</style>
+</head>
+<body>
+	<div id="container"><div id="imgs"></div></div>
+	<script>
+		const url = "https://api.are.na/v2/channels/paywalls";
+		let imgs = [];
+		let container = document.querySelector("#imgs");
+
+		fetch(url)
+			.then((response) => response.json())
+			.then((data) => {
+				console.log(data);
+				let contents = data.contents;
+				for (i=0; i<contents.length; i++) {
+					imgs.push(contents[i].image.display.url);
+				}
+		
+				tempHTML = "";
+				for (i=0; i<imgs.length; i++) {
+					tempHTML += `<img src='${imgs[i]}' class="img" style='transform:translate(${Math.random()*100-50}%,${Math.random()*150-100}%) rotateZ(${Math.random()*60-30}deg);opacity:0;' onclick="hide(this)">`;
+				}
+				container.innerHTML = tempHTML;
+
+				let imgsDOM = document.querySelectorAll("#imgs img");
+				var i = 0;
+				interval = setInterval(function() {
+					imgsDOM[i].style.opacity = 1;
+					i += 1;
+					if (i >= imgsDOM.length) {
+						clearInterval(interval);
+					}
+				}, 100);
+			});
+
+		function hide(e) {
+			e.style.transform = `translate(${Math.random()*1000-500}%,${Math.random()*1000-500}%) rotateZ(${Math.random()*360-360}deg)`;
+		}
+	</script>
+</body>
+</html>
