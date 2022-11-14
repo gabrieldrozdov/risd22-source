@@ -51,19 +51,19 @@
 				pointer-events: none;
 			}
 			#background-n {
-				background: linear-gradient(0deg, rgba(255,255,255,0) 50%, lightgreen 100%);
+				background: linear-gradient(0deg, rgba(255,255,255,0) 75%, lightgreen 100%);
 				opacity: 0;
 			}
 			#background-e {
-				background: linear-gradient(90deg, rgba(255,255,255,0) 50%, lightgreen 100%);
+				background: linear-gradient(90deg, rgba(255,255,255,0) 75%, lightgreen 100%);
 				opacity: 0;
 			}
 			#background-s {
-				background: linear-gradient(180deg, rgba(255,255,255,0) 50%, lightgreen 100%);
+				background: linear-gradient(180deg, rgba(255,255,255,0) 75%, lightgreen 100%);
 				opacity: 0;
 			}
 			#background-w {
-				background: linear-gradient(270deg, rgba(255,255,255,0) 50%, lightgreen 100%);
+				background: linear-gradient(270deg, rgba(255,255,255,0) 75%, lightgreen 100%);
 				opacity: 0;
 			}
 			.link {
@@ -83,6 +83,7 @@
 				background-size: cover;
 				background-repeat: no-repeat;
 				filter: grayscale(100%) blur(10px) brightness(50%);
+				background-image: url("assets/placeholder.svg");
 			}
 			.link:hover {
 				box-shadow: 0 10px 20px rgba(0,0,0,.3);
@@ -94,7 +95,7 @@
 				left: 0;
 				font-size: 30px;
 				text-align: left;
-				color: white;
+				color: black;
 				font-weight: 200;
 			}
 			.link div {
@@ -315,19 +316,11 @@
 			}
 
 			let newContent = "";
-			let names = ["wonderbeast22", "codinggodess", "superpickle7", "amazinglycoolusername", "toasterqueen", "sparklemuffin123", "ilovekittens69", "unicornlover101", "dancingpanda", "sillysausage", "cheesypoofs", "crazycookie123", "kittykat22", "lolipop123", "pinkbunny", "sugarcane", "happygiraffe", "luckyducky123", "dopeydolphin", "sleepybear", "sillygoose", "funnybunny", "cuddlykitten", "lazycat", "sassycat", "pinkpig", "preciouspuppy", "cutesyduck", "fluffybunny", "snugglykitten", "wondercat", "adorablepuppy", "playfulpuppy", "lovablepuppy", "girlygirl", "boyishboy", "sweettooth", "smileyface", "cuddlybear", "lovableteddy", "lovelydove", "happyface", "kissablelips", "cuddlyduck", "sillymonkey", "feistyferret", "laidbackllama", "lazyllama", "dopeydog", "sillydog", " playfulpony", "sassystallion", "wanderlust", "carefree", "curiouskitty", "naughtykitty", "sleepykitten", "loudlion", "cuddlycougar", "fiestyfeline", "sillylion", "grumpycat", "lazyturtle", "wackywalrus", "goofygorilla", "sillygiraffe", "naughtymonkey", " playfulpig", "wondermouse", "curiousmouse", "sleepymouse", "loudmouse", "quietmouse", "naughtymouse", "sillymouse", "wackywabbit", "curiousrabbit", "loudrabbit", "naughtyrabbit", "sillyrabbit", "wackydeer", "curiousdeer", "louddeer", "naughtydeer", "sillydeer", "wackysquirrel", "curioussquirrel", "loudsquirrel", "naughtysquirrel", "sillysquirrel", "wackybird", "curiousbird", "loudbird", "naughtybird", "sillybird", "wackyduck", "curiousduck", "loudduck", "naughtyduck", "sillyduck", "wackypuppy", "curiouspuppy", "loudpuppy", "naughtypuppy", "sillypuppy", "wackyturtle", "curiousturtle", "loudturtle", "naughtyturtle", "sillyturtle", "wackyfish", "curiousfish", "loudfish", "naughtyfish", "sillyfish", "wackysheep", "curioussheep", "loudsheep", "naughtysheep", "sillysheep", "wackydolphin", "curiousdolphin", "louddolphin", "naughtydolphin", "sillydolphin", "wackymouse", "curiousmouse", "loudmouse", "naughtymouse", "sillymouse", "wackyrat", "curiousrat", "loudrat", "naughtyrat", "sillyrat", "wackysnake", "curiussnake", "loudsnake", "naughtysnake", "sillysnake", "wackyfrog", "curiousfrog", "loudfrog", "naughtyfrog", "sillyfrog", "wackyhorse", "curioushorse", "loudhorse", "naughtyhorse", "sillyhorse", "wackylizard", "curiouslizard", "loudlizard", "naughtylizard", "sillylizard", "wackysalamander", "curioussalamander", "loudsalamander", "naughtysalamander", "sillysalamander", "wackycrocodile", "curiouscrocodile", "loudcrocodile", "naughtycrocodile", "sillycrocodile", "wackywhale", "curiouswhale", "loudwhale", "naughtywhale", "sillywhale", "wackyseal", "curiousseal", "loudseal", "naughtyseal", "sillyseal", "wackyoctopus", "curiousoctopus", "loudoctopus", "naughtyoctopus", "sillyoctopus", "wackyspider", "curiousspider", "loudspider", "naughtyspider", "sillyspider", "wackybug", "curiousbug", "loudbug", "naughtybug", "sillybug", "wackylobster", "curiouslobster", "loudlobster", "naughtylobster", "sillylobster", "wackycrab", "curiouscrab", "loudcrab", "naughtycrab", "sillycrab", "wackyclam", "curiousclam", "loudclam", "naughtyclam", "sillyclam", "wackyscallop", "curiousscallop", "loudscallop", "naughtyscallop", "sillyscallop", "wackymussel", "curiousmussel", "loudmussel", "naughtymussel", "sillymussel", "wackysnail", "curioussnail", "loudsnail", "naughtysnail", "sillysnail", "wackyslug", "curiousslug", "loudslug", "naughtyslug", "sillyslug", "wackyworm", "curiousworm", "loudworm", "naughtyworm", "sillyworm", "wackyshrimp", "curioushrimp", "loudhrimp", "naughtyhrimp", "sillyhrimp", "wackyprawn", "curiousprawn", "loudprawn", "naughtyprawn", "sillyprawn", "wackysquid", "curiousquid", "loudquid", "naughtyquid", "sillysquid", "wackyscorpion", "curiousscorpion", "loudscorpion", "naughtyscorpion", "sillyscorpion", "wackyjellyfish", "curiousjellyfish", "loudjellyfish", "naughtyjellyfish", "sillyjellyfish", "wackyshark", "curiousshark", "loudshark", "naughtyshark", "sillyshark", "wackystingray", "curiousstingray", "loudstingray", "naughtystingray", "sillystingray", "wackytuna", "curioustuna", "loudtuna", "naughtytuna", "sillytuna", "wackysalmon", "curioussalmon", "loudsalmon", "naughtysalmon", "sillysalmon", "wackymackerel", "curiousmackerel", "loudmackerel", "naughtymackerel", "sillymackerel", "wackysardine", "curiussardine", "loudsardine", "naughtysardine", "sillysardine", "wackyherring", "curiousherring", "loudherring", "naughtyherring", "sillyherring", "wackyanchovy", "curiousanchovy", "loudanchovy", "naughtyanchovy", "sillyanchovy", "wackyshalibut", "curiousshalibut", "loudshalibut", "naughtyshalibut", "sillyshalibut", "wackysole", "curioussole", "loudsole", "naughtysole", "sillysole", "wackyflounder", "curiousflounder", "loudflounder", "naughtyflounder", "sillyflounder", "wackypike", "curiouspike", "loudpike", "naughtypike", "sillypike", "wackylamprey", "curiouslamprey", "loudlamprey", "naughtylamprey", "sillylamprey", "wackytrout", "curioustrout", "loudtrout", "naughtytrout", "sillylamprey", "wackysunfish", "curioustrout", "loudtrout", "naughtytrout", "sillylamprey", "wackysnapper", "curioussnapper", "loudsnapper", "naughtysnapper", "sillysnapper"];
-			let quotes = ["You a thousand percent need a portfolio. I often will skip through links of folders. Knowing how to sell your work is just as important as the work itself and when someone is going through a hundred portfolios, making sure you stand out from the crowd is key. ", "What worked for someone might not work for everyone. I understand that, but still maybe there are some valid points I should keep in mind.", "I like to use famous paintings and paint over them in order to give them another look (a more underground look). It doesn't have any other purpose beyond looking cool. My goal is to sell this design (I don't know how or to who). I want it for people to skate it or just to hang it on their walls.", "Pretty positive I’ve said this about this design in the past but you should really rewrite all of the type by hand, either irl with an old semi dried up pen or with the same ps brush you’re using for the other drawings.", "Her head looks bigger than the Mayor’s whole body", "The last one, with what appears to be a colonized Moon, is my favorite. By then, maybe we decide we prefer the Eiffel tower there?", "Why does she look exactly like Mom from Futurama?", "When I decide to drive to the restaurant instead. For some reason my dog is already there before I arrive waiting to eat my pizza.", "Is there a reason I’ve been seeing so many reinterpretations of this particular painting over the last few weeks? I’ve been collecting them but they don’t seem to be from the same artist (edit: 2 are from the same artist, I just noticed), so I’m curious if there’s some kind of trend or just coincidence"];
-			let titles = ["subway","highlight","scale","suspect","suggest","civilian","confine","run","genuine","trainer","age","product","conflict","fortune","video","temperature","student","pay","spokesperson","air","precedent","responsible","cherry","deficiency","resist","script","thick","latest","imagine","harsh","include","apology","adoption","bell","rob","rice","sunrise","top","outline","sweep","breakdown","try","disturbance","dozen","nightmare","undertake","collect","throw","menu","fuel","thinker","advantage","dragon","obligation","cinema","consumer","observation","civilian","ideology","war","price","priority","regular","cunning","ivory","position","introduce","worker","remedy","wrestle","spin","publish","horseshoe","cancel","knife","realism","cattle","ditch","cater","bar","accent","club","graphic","modest","compensation","insure","theme","bind","permanent","expand","include","ambiguous","engineer","ignorant","hobby","cigarette","think","wilderness","replace","guerrilla","chief","texture","curl","hardware","mention","kidnap","policeman","floor","wolf","plane","player","producer","galaxy","insist","efflux","falsify","available","notorious","total","multiply","extraterrestrial","discount","nap","scandal","construct","fresh","craft","quarrel","stress","banana","north","vegetarian","park","eagle","dignity","trivial","context","employ","apple","please","creed","kinship","exile","snub","twilight","fair","skeleton","motorcycle","neck","freight","ambiguity","grave","premature","thoughtful","housing","density","role","dare","adventure","exceed","champagne","shed","concede","bargain","angle","merit","strategic","corn","strong","swear","motorist","glimpse","lobby","parallel","wording","aluminium","window","hip","ignore","lifestyle","polish","appetite","jelly","aspect","fat","extension","immune","mutter","activity","insert","log","passion","muggy","deficit","express","pop","party","ranch","disappear","instruction"];
 			for (i=0; i<168; i++) {
-				let name = names[parseInt(Math.random()*names.length)];
-				let title = titles[parseInt(Math.random()*titles.length)] + " " + titles[parseInt(Math.random()*titles.length)];
 				if (Math.random() > .3) {
-					let img = parseInt(Math.random()*146);
-					newContent += `<a target='_blank' class='link' style="background-image:url('assets/imgs/img${img}.jpg')" onmouseover='seen(this)' onclick='temp()'><div><h2>${title}</h2><h3>Posted by ${name}</h3></div></a>`;
+					newContent += `<a target='_blank' class='link' onmouseover='seen(this)' onclick='temp()'><div><h2>Post Title</h2><h3>Posted by Username</h3></div></a>`;
 				} else {
-					let quote = quotes[parseInt(Math.random()*quotes.length)];
-					let hue = parseInt(Math.random()*360);
-					newContent += `<a target='_blank' class='link' onmouseover='seen(this)' onclick='temp()' style='background-color:hsl(${hue},100%, 25%)'><p>${quote}</p><div><h2>${title}</h2><h3>Posted by ${name}</h3></div></a>`;
+					newContent += `<a target='_blank' class='link' onmouseover='seen(this)' onclick='temp()' style="background-image:unset;"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p><div><h2>Post Title</h2><h3>Posted by Username</h3></div></a>`;
 				}
 			}
 			content.innerHTML += newContent;
