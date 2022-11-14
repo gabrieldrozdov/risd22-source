@@ -1,0 +1,358 @@
+<html>
+	<head>
+		<style>
+			@font-face {
+				font-family: "Public Sans";
+				src: url("assets/PublicSans-VariableFont_wght.ttf") format("truetype");
+				font-weight: 100 900;
+			}
+			* {
+				box-sizing: border-box;
+				margin: 0;
+				font-family: "Public Sans";
+				font-size: 18px;
+			}
+			body {
+				background-color: white;
+				font-weight: 100;
+				width: 100vw;
+				height: 100vh;
+				overflow: hidden;
+			}
+			#container {
+				width: calc(100vw - 20px);
+				height: calc(100vh - 20px);
+				border: 2px solid black;
+				overflow: hidden;
+				margin: 10px;
+				cursor: crosshair;
+				background-color: #fafafa;
+			}
+			#content {
+				width: 500vw;
+				height: 500vw;
+				transform: translateX(-200vw) translateY(-200vw);
+				transition: transform .1s;
+				transition-timing-function: linear;
+				display: grid;
+				grid-template-columns: repeat(13, 1fr);
+				grid-template-rows: repeat(13, 1fr);
+				grid-gap: 5vw;
+				padding: 5vw;
+			}
+			.background-gradient {
+				width: 100vw;
+				height: 100vh;
+				position: fixed;
+				top: 0;
+				z-index: 999;
+				transition: opacity .2s;
+				transition-timing-function: linear;
+				pointer-events: none;
+			}
+			#background-n {
+				background: linear-gradient(0deg, rgba(255,255,255,0) 50%, lightgreen 100%);
+				opacity: 0;
+			}
+			#background-e {
+				background: linear-gradient(90deg, rgba(255,255,255,0) 50%, lightgreen 100%);
+				opacity: 0;
+			}
+			#background-s {
+				background: linear-gradient(180deg, rgba(255,255,255,0) 50%, lightgreen 100%);
+				opacity: 0;
+			}
+			#background-w {
+				background: linear-gradient(270deg, rgba(255,255,255,0) 50%, lightgreen 100%);
+				opacity: 0;
+			}
+			.link {
+				border: 2px solid black;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 2vw;
+				text-align: center;
+				padding: 2vw;
+				color: black;
+				text-decoration: none;
+				cursor: pointer;
+				transition: .2s;
+				transition-timing-function: ease-in-out;
+				background-position: center;
+				background-size: cover;
+				background-repeat: no-repeat;
+				filter: grayscale(100%) blur(10px) brightness(50%);
+			}
+			.link:hover {
+				box-shadow: 0 10px 20px rgba(0,0,0,.3);
+			}
+			.link p {
+				padding: 10px;
+				position: absolute;
+				top: 0;
+				left: 0;
+				font-size: 30px;
+				text-align: left;
+				color: white;
+				font-weight: 200;
+			}
+			.link div {
+				position: absolute;
+				bottom: 0;
+				background-color: white;
+				width: 100%;
+				text-align: left;
+			}
+			.link h2 {
+				padding: 10px;
+				border-top: 2px solid black;
+				font-weight: 900;
+				text-transform: capitalize;
+			}
+			.link h3 {
+				padding: 10px;
+				border-top: 2px solid black;
+				font-weight: 200;
+			}
+			.intro {
+				grid-column: 7;
+				grid-row: 7;
+				border-radius: 100%;
+				font-weight: 900;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: black;
+			}
+			#temp {
+				position: absolute;
+				opacity: 0;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				width: 100vw;
+				height: 100vh;
+				pointer-events: none;
+				background: rgba(0,0,0,0.8);
+				transition: .5s;
+				font-size: 50px;
+				font-weight: 500;
+				color: white;
+				z-index: 9999;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="temp"><p>Subpages are not available in this prototype!</p></div>
+		<div id="background-n" class="background-gradient"></div>
+		<div id="background-e" class="background-gradient"></div>
+		<div id="background-s" class="background-gradient"></div>
+		<div id="background-w" class="background-gradient"></div>
+		<div id="container" onmousemove="setTarget(event)">
+			<div id="content"><h1 class="intro">Design + Community Prototype</h1></div>
+		</div>
+
+		<script>
+			let container = document.querySelector("#container");
+			let content = document.querySelector("#content");
+			let backgroundN = document.querySelector("#background-n");
+			let backgroundE = document.querySelector("#background-e");
+			let backgroundS = document.querySelector("#background-s");
+			let backgroundW = document.querySelector("#background-w");
+			
+			let w = window.innerWidth;
+			let h = window.innerHeight;
+			let mouseX = 0;
+			let mouseY = 0;
+			let percentX = 0.5;
+			let percentY = 0.5;
+			function setTarget(e) {
+				mouseX = e.clientX;
+				mouseY = e.clientY;
+				percentX = mouseX/w;
+				percentY = mouseY/h;
+			};
+
+			let posX = 0.5;
+			let posY = 0.5;
+			let velX = 0;
+			let velY = 0;
+			let maxVel = .1;
+			let acc = 0.005;
+			let drag = .8;
+			let range = .2;
+			setInterval(function() {
+				// Detect direction
+				if (percentX > 1-range) {
+					velX += (percentX-(1-range))*acc;
+				} else if (percentX < 0+range) {
+					velX -= (range-percentX)*acc;
+				} else {
+					velX *= drag;
+				}
+				if (percentY > 1-range) {
+					velY += (percentY-(1-range))*acc;
+				} else if (percentY < 0+range) {
+					velY -= (range-percentY)*acc;
+				} else {
+					velY *= drag;
+				}
+
+				// Display the correct cursor
+				if (percentX > 1-range && percentY < 0+range){
+					container.style.cursor = "ne-resize";
+					backgroundN.style.opacity = 5*(range-percentY);
+					backgroundE.style.opacity = 5*(percentX-1+range);
+					backgroundS.style.opacity = 0;
+					backgroundW.style.opacity = 0;
+				} else if (percentX > 1-range && percentY > 1-range){
+					container.style.cursor = "se-resize";
+					backgroundS.style.opacity = 5*(percentY-1+range);
+					backgroundE.style.opacity = 5*(percentX-1+range);
+					backgroundN.style.opacity = 0;
+					backgroundW.style.opacity = 0;
+				} else if (percentX < 0+range && percentY > 1-range){
+					container.style.cursor = "sw-resize";
+					backgroundS.style.opacity = 5*(percentY-1+range);
+					backgroundW.style.opacity = 5*(range-percentX);
+					backgroundE.style.opacity = 0;
+					backgroundN.style.opacity = 0;
+				} else if (percentX < 0+range&& percentY < 0+range){
+					container.style.cursor = "nw-resize";
+					backgroundN.style.opacity = 5*(range-percentY);
+					backgroundW.style.opacity = 5*(range-percentX);
+					backgroundE.style.opacity = 0;
+					backgroundS.style.opacity = 0;
+				} else if (percentY < 0+range) {
+					container.style.cursor = "n-resize";
+					backgroundN.style.opacity = 5*(range-percentY);
+					backgroundE.style.opacity = 0;
+					backgroundS.style.opacity = 0;
+					backgroundW.style.opacity = 0;
+				} else if (percentX > 1-range) {
+					container.style.cursor = "e-resize";
+					backgroundE.style.opacity = 5*(percentX-1+range);
+					backgroundN.style.opacity = 0;
+					backgroundS.style.opacity = 0;
+					backgroundW.style.opacity = 0;
+				} else if (percentY > 1-range) {
+					container.style.cursor = "s-resize";
+					backgroundS.style.opacity = 5*(percentY-1+range);
+					backgroundE.style.opacity = 0;
+					backgroundN.style.opacity = 0;
+					backgroundW.style.opacity = 0;
+				} else if (percentX < 0+range) {
+					container.style.cursor = "w-resize";
+					backgroundW.style.opacity = 5*(range-percentX);
+					backgroundE.style.opacity = 0;
+					backgroundS.style.opacity = 0;
+					backgroundN.style.opacity = 0;
+				} else {
+					container.style.cursor = "crosshair";
+					backgroundN.style.opacity = 0;
+					backgroundE.style.opacity = 0;
+					backgroundS.style.opacity = 0;
+					backgroundW.style.opacity = 0;
+				}
+
+				// Max velocity
+				if (velX > maxVel) {
+					velX = maxVel;
+				} else if (velX < -maxVel) {
+					velX = -maxVel;
+				}
+				if (velY > maxVel) {
+					velY = maxVel;
+				} else if (velY < -maxVel) {
+					velY = -maxVel;
+				}
+
+				// Set position
+				posX += velX;
+				posY += velY;
+
+				// Boundaries
+				if (posX > 1) {
+					posX = 1;
+					velX = 0;
+					backgroundE.style.background = "linear-gradient(90deg, rgba(255,255,255,0) 75%, red 100%)";
+					backgroundE.style.opacity = 1;
+				} else if (posX < 0) {
+					posX = 0;
+					velX = 0;
+					backgroundW.style.background = "linear-gradient(270deg, rgba(255,255,255,0) 75%, red 100%)";
+					backgroundW.style.opacity = 1;
+				} else {
+					backgroundE.style.background = "linear-gradient(90deg, rgba(255,255,255,0) 75%, lightgreen 100%)";
+					backgroundW.style.background = "linear-gradient(270deg, rgba(255,255,255,0) 75%, lightgreen 100%)";
+				}
+				if (posY > 1) {
+					posY = 1;
+					velY = 0;
+					backgroundS.style.background = "linear-gradient(180deg, rgba(255,255,255,0) 75%, red 100%)";
+					backgroundS.style.opacity = 1;
+				} else if (posY < 0) {
+					posY = 0;
+					velY = 0;
+					backgroundN.style.background = "linear-gradient(0deg, rgba(255,255,255,0) 75%, red 100%)";
+					backgroundN.style.opacity = 1;
+				} else {
+					backgroundS.style.background = "linear-gradient(180deg, rgba(255,255,255,0) 75%, lightgreen 100%)";
+					backgroundN.style.background = "linear-gradient(0deg, rgba(255,255,255,0) 75%, lightgreen 100%)";
+				}
+
+				content.style.transform = "translateX("+(-400*posX)+"vw) translateY("+(-450*posY)+"vw)";
+			}, 75);
+
+			function seen(e) {
+				e.style.filter = "grayscale(0%) blur(0px)";
+			}
+			let tempDiv = document.querySelector("#temp");
+			function temp() {
+				tempDiv.style.opacity = 1;
+				setTimeout(() => {tempDiv.style.opacity = 0;}, 2000);
+			}
+
+			let newContent = "";
+			let names = ["wonderbeast22", "codinggodess", "superpickle7", "amazinglycoolusername", "toasterqueen", "sparklemuffin123", "ilovekittens69", "unicornlover101", "dancingpanda", "sillysausage", "cheesypoofs", "crazycookie123", "kittykat22", "lolipop123", "pinkbunny", "sugarcane", "happygiraffe", "luckyducky123", "dopeydolphin", "sleepybear", "sillygoose", "funnybunny", "cuddlykitten", "lazycat", "sassycat", "pinkpig", "preciouspuppy", "cutesyduck", "fluffybunny", "snugglykitten", "wondercat", "adorablepuppy", "playfulpuppy", "lovablepuppy", "girlygirl", "boyishboy", "sweettooth", "smileyface", "cuddlybear", "lovableteddy", "lovelydove", "happyface", "kissablelips", "cuddlyduck", "sillymonkey", "feistyferret", "laidbackllama", "lazyllama", "dopeydog", "sillydog", " playfulpony", "sassystallion", "wanderlust", "carefree", "curiouskitty", "naughtykitty", "sleepykitten", "loudlion", "cuddlycougar", "fiestyfeline", "sillylion", "grumpycat", "lazyturtle", "wackywalrus", "goofygorilla", "sillygiraffe", "naughtymonkey", " playfulpig", "wondermouse", "curiousmouse", "sleepymouse", "loudmouse", "quietmouse", "naughtymouse", "sillymouse", "wackywabbit", "curiousrabbit", "loudrabbit", "naughtyrabbit", "sillyrabbit", "wackydeer", "curiousdeer", "louddeer", "naughtydeer", "sillydeer", "wackysquirrel", "curioussquirrel", "loudsquirrel", "naughtysquirrel", "sillysquirrel", "wackybird", "curiousbird", "loudbird", "naughtybird", "sillybird", "wackyduck", "curiousduck", "loudduck", "naughtyduck", "sillyduck", "wackypuppy", "curiouspuppy", "loudpuppy", "naughtypuppy", "sillypuppy", "wackyturtle", "curiousturtle", "loudturtle", "naughtyturtle", "sillyturtle", "wackyfish", "curiousfish", "loudfish", "naughtyfish", "sillyfish", "wackysheep", "curioussheep", "loudsheep", "naughtysheep", "sillysheep", "wackydolphin", "curiousdolphin", "louddolphin", "naughtydolphin", "sillydolphin", "wackymouse", "curiousmouse", "loudmouse", "naughtymouse", "sillymouse", "wackyrat", "curiousrat", "loudrat", "naughtyrat", "sillyrat", "wackysnake", "curiussnake", "loudsnake", "naughtysnake", "sillysnake", "wackyfrog", "curiousfrog", "loudfrog", "naughtyfrog", "sillyfrog", "wackyhorse", "curioushorse", "loudhorse", "naughtyhorse", "sillyhorse", "wackylizard", "curiouslizard", "loudlizard", "naughtylizard", "sillylizard", "wackysalamander", "curioussalamander", "loudsalamander", "naughtysalamander", "sillysalamander", "wackycrocodile", "curiouscrocodile", "loudcrocodile", "naughtycrocodile", "sillycrocodile", "wackywhale", "curiouswhale", "loudwhale", "naughtywhale", "sillywhale", "wackyseal", "curiousseal", "loudseal", "naughtyseal", "sillyseal", "wackyoctopus", "curiousoctopus", "loudoctopus", "naughtyoctopus", "sillyoctopus", "wackyspider", "curiousspider", "loudspider", "naughtyspider", "sillyspider", "wackybug", "curiousbug", "loudbug", "naughtybug", "sillybug", "wackylobster", "curiouslobster", "loudlobster", "naughtylobster", "sillylobster", "wackycrab", "curiouscrab", "loudcrab", "naughtycrab", "sillycrab", "wackyclam", "curiousclam", "loudclam", "naughtyclam", "sillyclam", "wackyscallop", "curiousscallop", "loudscallop", "naughtyscallop", "sillyscallop", "wackymussel", "curiousmussel", "loudmussel", "naughtymussel", "sillymussel", "wackysnail", "curioussnail", "loudsnail", "naughtysnail", "sillysnail", "wackyslug", "curiousslug", "loudslug", "naughtyslug", "sillyslug", "wackyworm", "curiousworm", "loudworm", "naughtyworm", "sillyworm", "wackyshrimp", "curioushrimp", "loudhrimp", "naughtyhrimp", "sillyhrimp", "wackyprawn", "curiousprawn", "loudprawn", "naughtyprawn", "sillyprawn", "wackysquid", "curiousquid", "loudquid", "naughtyquid", "sillysquid", "wackyscorpion", "curiousscorpion", "loudscorpion", "naughtyscorpion", "sillyscorpion", "wackyjellyfish", "curiousjellyfish", "loudjellyfish", "naughtyjellyfish", "sillyjellyfish", "wackyshark", "curiousshark", "loudshark", "naughtyshark", "sillyshark", "wackystingray", "curiousstingray", "loudstingray", "naughtystingray", "sillystingray", "wackytuna", "curioustuna", "loudtuna", "naughtytuna", "sillytuna", "wackysalmon", "curioussalmon", "loudsalmon", "naughtysalmon", "sillysalmon", "wackymackerel", "curiousmackerel", "loudmackerel", "naughtymackerel", "sillymackerel", "wackysardine", "curiussardine", "loudsardine", "naughtysardine", "sillysardine", "wackyherring", "curiousherring", "loudherring", "naughtyherring", "sillyherring", "wackyanchovy", "curiousanchovy", "loudanchovy", "naughtyanchovy", "sillyanchovy", "wackyshalibut", "curiousshalibut", "loudshalibut", "naughtyshalibut", "sillyshalibut", "wackysole", "curioussole", "loudsole", "naughtysole", "sillysole", "wackyflounder", "curiousflounder", "loudflounder", "naughtyflounder", "sillyflounder", "wackypike", "curiouspike", "loudpike", "naughtypike", "sillypike", "wackylamprey", "curiouslamprey", "loudlamprey", "naughtylamprey", "sillylamprey", "wackytrout", "curioustrout", "loudtrout", "naughtytrout", "sillylamprey", "wackysunfish", "curioustrout", "loudtrout", "naughtytrout", "sillylamprey", "wackysnapper", "curioussnapper", "loudsnapper", "naughtysnapper", "sillysnapper"];
+			let quotes = ["You a thousand percent need a portfolio. I often will skip through links of folders. Knowing how to sell your work is just as important as the work itself and when someone is going through a hundred portfolios, making sure you stand out from the crowd is key. ", "What worked for someone might not work for everyone. I understand that, but still maybe there are some valid points I should keep in mind.", "I like to use famous paintings and paint over them in order to give them another look (a more underground look). It doesn't have any other purpose beyond looking cool. My goal is to sell this design (I don't know how or to who). I want it for people to skate it or just to hang it on their walls.", "Pretty positive I’ve said this about this design in the past but you should really rewrite all of the type by hand, either irl with an old semi dried up pen or with the same ps brush you’re using for the other drawings.", "Her head looks bigger than the Mayor’s whole body", "The last one, with what appears to be a colonized Moon, is my favorite. By then, maybe we decide we prefer the Eiffel tower there?", "Why does she look exactly like Mom from Futurama?", "When I decide to drive to the restaurant instead. For some reason my dog is already there before I arrive waiting to eat my pizza.", "Is there a reason I’ve been seeing so many reinterpretations of this particular painting over the last few weeks? I’ve been collecting them but they don’t seem to be from the same artist (edit: 2 are from the same artist, I just noticed), so I’m curious if there’s some kind of trend or just coincidence"];
+			let titles = ["subway","highlight","scale","suspect","suggest","civilian","confine","run","genuine","trainer","age","product","conflict","fortune","video","temperature","student","pay","spokesperson","air","precedent","responsible","cherry","deficiency","resist","script","thick","latest","imagine","harsh","include","apology","adoption","bell","rob","rice","sunrise","top","outline","sweep","breakdown","try","disturbance","dozen","nightmare","undertake","collect","throw","menu","fuel","thinker","advantage","dragon","obligation","cinema","consumer","observation","civilian","ideology","war","price","priority","regular","cunning","ivory","position","introduce","worker","remedy","wrestle","spin","publish","horseshoe","cancel","knife","realism","cattle","ditch","cater","bar","accent","club","graphic","modest","compensation","insure","theme","bind","permanent","expand","include","ambiguous","engineer","ignorant","hobby","cigarette","think","wilderness","replace","guerrilla","chief","texture","curl","hardware","mention","kidnap","policeman","floor","wolf","plane","player","producer","galaxy","insist","efflux","falsify","available","notorious","total","multiply","extraterrestrial","discount","nap","scandal","construct","fresh","craft","quarrel","stress","banana","north","vegetarian","park","eagle","dignity","trivial","context","employ","apple","please","creed","kinship","exile","snub","twilight","fair","skeleton","motorcycle","neck","freight","ambiguity","grave","premature","thoughtful","housing","density","role","dare","adventure","exceed","champagne","shed","concede","bargain","angle","merit","strategic","corn","strong","swear","motorist","glimpse","lobby","parallel","wording","aluminium","window","hip","ignore","lifestyle","polish","appetite","jelly","aspect","fat","extension","immune","mutter","activity","insert","log","passion","muggy","deficit","express","pop","party","ranch","disappear","instruction"];
+			for (i=0; i<168; i++) {
+				let name = names[parseInt(Math.random()*names.length)];
+				let title = titles[parseInt(Math.random()*titles.length)] + " " + titles[parseInt(Math.random()*titles.length)];
+				if (Math.random() > .3) {
+					let img = parseInt(Math.random()*146);
+					newContent += `<a target='_blank' class='link' style="background-image:url('assets/imgs/img${img}.jpg')" onmouseover='seen(this)' onclick='temp()'><div><h2>${title}</h2><h3>Posted by ${name}</h3></div></a>`;
+				} else {
+					let quote = quotes[parseInt(Math.random()*quotes.length)];
+					let hue = parseInt(Math.random()*360);
+					newContent += `<a target='_blank' class='link' onmouseover='seen(this)' onclick='temp()' style='background-color:hsl(${hue},100%, 25%)'><p>${quote}</p><div><h2>${title}</h2><h3>Posted by ${name}</h3></div></a>`;
+				}
+			}
+			content.innerHTML += newContent;
+
+			/* Build Wikipedia api URL and fetch, then build spaces */
+			// let url = "https://en.wikipedia.org/w/api.php"; 
+			// let params = {
+			// 	action: "query",
+			// 	format: "json",
+			// 	list: "random",
+			// 	rnnamespace: "0",
+			// 	rnlimit: "140"
+			// };
+			// url = url + "?origin=*";
+			// Object.keys(params).forEach(function(key){url += "&" + key + "=" + params[key];});
+			// fetch(url)
+			// 	.then(function(response) { return response.json(); })
+			// 	.then(function(response) {
+			// 		let randoms = response.query.random;
+			// 		for (var r in randoms) {
+			// 			newContent += `<a href='https://en.wikipedia.org/wiki/${randoms[r].title}' target='_blank' class='link' onmouseover='changeColor(this)'>${randoms[r].title}</a>`;
+			// 			}
+			// 		content.innerHTML += newContent;
+			// 		})
+			// 	.catch(function(error){console.log(error);});
+		</script>
+	</body>
+</html>
